@@ -64,7 +64,7 @@ def get_scores():
 
 def get_sorted_scores():
     scores = get_scores()
-    scores.sort(key=lambda x: x[1])
+    scores.sort(key=lambda x: x[1], reverse=True)
     return scores
 
 
@@ -225,9 +225,9 @@ def answer(author):
         winners = get_winners(sorted_scores)
         if len(winners) == 1:
             winner = winners[0]
-            print "winner: %r" % winner
+            # print "winner: %r" % winner
             winning_player_text = get_player_text(winner[0])
-            print "winning_player_text: %r" % winning_player_text
+            # print "winning_player_text: %r" % winning_player_text
             game_over_message = render_template(
                 'game_over',
                 all_scores_text=get_scores_text(),
