@@ -1,7 +1,7 @@
-welcome: Welcome to memory game. I'm going to say three numbers for you to repeat backwards. Ready?
+welcome: Welcome to Don't Call me Shirley! Are you ready to test your movie quote knowledge?
 
-round: Can you repeat the numbers {{ numbers|join(", ") }} backwards?
+round: Who said {{quote}}?
 
 win: Good job!
 
-lose: Sorry, that's the wrong answer.
+lose: Sorry, that's incorrect, the answer is {{author}}

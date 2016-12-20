@@ -1,5 +1,7 @@
 
 import logging
+import requests
+import json
 
 from random import randint
 
@@ -28,28 +30,34 @@ def new_game():
 
 def next_round():
 
-    numbers = [randint(0, 9) for _ in range(3)]
+  response = requests.post("https://andruxnet-random-famous-quotes.p.mashape.com/?cat=movies",
+  headers={
+    "X-Mashape-Key": "qxw2noHOjgmshc3avMkLGu49Jcvrp186kqjjsnvnLClFDEYPGG",
+    "Content-Type": "application/x-www-form-urlencoded",
+    "Accept": "application/json"
+  }
+  )
+  quote_json = json.loads(response.text)
 
-    round_msg = render_template('round', numbers=numbers)
+  round_msg = render_template('round', quote=quote_json['quote'])
 
-    session.attributes['numbers'] = numbers[::-1]  # reverse
-
-    return question(round_msg)
+  session.attributes['quote_json']=quote_json
+  return question(round_msg)
 
 
 @ask.intent("AnswerIntent", convert={'first': int, 'second': int, 'third': int})
 
-def answer(first, second, third):
+def answer(author):
 
-    winning_numbers = session.attributes['numbers']
-
-    if [first, second, third] == winning_numbers:
+    
+    quote_json = session.attributes['quote_json']
+    if author == quote_json['author']:
 
         msg = render_template('win')
 
     else:
 
-        msg = render_template('lose')
+        msg = render_template('lose', author=quote_json['author'])
 
     return statement(msg)
 
