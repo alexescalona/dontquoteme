@@ -9,7 +9,9 @@ from fuzzywuzzy import process
 
 
 NUM_ROUNDS = 3
+NUM_PLAYERS = 2
 MAX_PLAYERS = 5
+
 
 app = Flask(__name__)
 ask = Ask(app, "/")
@@ -57,13 +59,25 @@ def set_score_for_player(player_num, score):
 
 
 def get_scores():
-    return [(n+1, score_for_player(n+1)) for n in range(number_of_players)]
+    return [(n+1, score_for_player(n+1)) for n in range(number_of_players())]
 
 
 def get_sorted_scores():
-    def getkey(item):
-        return item[1]
-    return sorted(get_scores(), getkey)
+    scores = get_scores()
+    scores.sort(key=lambda x: x[1])
+    return scores
+
+
+def get_winners(sorted_scores=None):
+    if sorted_scores is None:
+        sorted_scores = get_sorted_scores()
+    winners = []
+    for player_num, score in sorted_scores:
+        if len(winners) == 0 or score == winners[0][1]:
+            winners.append((player_num, score))
+        else:
+            break
+    return winners
 
 
 def current_players_score():
@@ -77,7 +91,9 @@ def increment_score():
     set_score_for_player(player_num, score)
 
 
-def get_points_text(score):
+def get_points_text(score=None):
+    if score is None:
+        score = current_players_score()
     if score == 1:
         return "{0} point".format(score)
     elif score == 0:
@@ -91,14 +107,16 @@ def get_scores_text(scores=None):
     if scores is None:
         scores = get_sorted_scores()
     for (player_num, score) in scores:
-        text += "{0} has {0}".format(
+        text += "%s has %s. " % (
             get_player_text(player_num),
             get_points_text(score),
         )
     return text
 
 
-def get_player_text(player_num):
+def get_player_text(player_num=None):
+    if player_num is None:
+        player_num = current_player()
     return "Player {0}".format(player_num)
 
 
@@ -143,7 +161,7 @@ def new_game():
 
 
 @ask.intent("NumberOfPlayersIntent")
-def number_of_players(players):
+def number_of_players_intent(players):
     print "number_of_players(%r)" % players
     if players is None:
         players_int = 0
@@ -164,11 +182,18 @@ def number_of_players(players):
     msg = "%s %s" % (start_message, round_message)
     return question(msg)
 
-#
-# @ask.intent("YesIntent")
-# def next_round():
-#     msg = setup_round()
-#     return question(msg)
+
+@ask.intent("YesIntent")
+def start_game():
+    session.attributes['players'] = NUM_PLAYERS
+    round_message = setup_round()
+    start_message = render_template(
+        'game_start',
+        rounds=NUM_ROUNDS,
+        players=NUM_PLAYERS,
+    )
+    msg = "%s %s" % (start_message, round_message)
+    return question(msg)
 
 
 @ask.intent("AnswerIntent")
@@ -178,32 +203,43 @@ def answer(author):
         return new_game()
 
     success = check_response(author, quote_json['author'])
-
     if success:
         increment_score()
-        win_lose_message = render_template('win')
+        tpl_name = 'win'
     else:
-        win_lose_message = render_template('lose', author=quote_json['author'])
+        tpl_name = 'lose_'+str(randint(1, 10))
+
+    win_lose_message = render_template(
+        tpl_name,
+        author=quote_json['author'],
+        player_text=get_player_text(),
+        points_text=get_points_text(),
+    )
 
     increment_round()
     if is_game_over():
         # Show game over message and ask if they want to play again?
         sorted_scores = get_sorted_scores()
-        winner = sorted_scores[0][0]
-        winning_player_text = get_player_text(winner)
-        game_over_message = render_template(
-            'game_over',
-            all_scores_text=get_scores_text(),
-            winning_player_text=winning_player_text,
-        )
+        winners = get_winners(sorted_scores)
+        if len(winners) == 1:
+            winning_player_text = get_player_text(winners[0])
+            game_over_message = render_template(
+                'game_over',
+                all_scores_text=get_scores_text(),
+                winning_player_text=winning_player_text,
+            )
+        else:
+            game_over_message = render_template(
+                'game_over_tie',
+                all_scores_text=get_scores_text(),
+            )
+
         msg = "%s %s" % (win_lose_message, game_over_message)
         return statement(msg)
     else:
         # Show next round
         round_msg = setup_round()
-        points_message = render_template('points',
-                                         points_text=get_points_text())
-        msg = "%s %s %s" % (win_lose_message, points_message, round_msg)
+        msg = "%s %s" % (win_lose_message, round_msg)
         return question(msg)
 
 if __name__ == '__main__':

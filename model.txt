@@ -1,4 +1,3 @@
 YesIntent yes
 YesIntent sure
-NumberOfPlayersIntent {number}
 AnswerIntent {author}

@@ -1,6 +1,17 @@
-welcome: Welcome to Don't Call me Shirley! How many players will be testing their movie quote knowledge today?
-game_start: We'll be playing {{rounds}} rounds today. Here we go!
+welcome: Welcome to Don't Call me Shirley! Are you ready to test your movie trivia knowledge?
+game_start: We'll be playing {{rounds}} rounds today with {{players}} players. Here we go!
 round: Round {{round}}. {{player_text}} is up. Who said {{quote}}?
 win: Good job, {{player_text}}! That's correct! You have {{points_text}}.
-lose: Sorry, thats incorrect; the answer is {{author}}. {{player_text}}, you now have {{points_text}}.
-game_over: That's the end of the game. Congratulations {{winning_player_text}}! {{all_scores_text}}. Thanks for playing!
+lose: Sorry, thats incorrect; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
+lose_1: That answer is bad and you should feel bad; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
+lose_2: You are the weakest link; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
+lose_3: My hamster would have known that; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
+lose_4: No. Just, no; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
+lose_5: what you have just said is one of the most insanely idiotic things I have ever heard; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
+lose_6: Everyone in this room is now dumber for having listened to your response; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
+lose_7: I award no points, and may God have mercy on your soul; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
+lose_8: noooooooooooooope; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
+lose_9: Methink’st thou art a general offence and every man should beat thee; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
+lose_10: I desire that we be better strangers; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
+game_over_winner: That's the end of the game. Congratulations {{winning_player_text}}! {{all_scores_text}}. Thanks for playing!
+game_over_tie: That's the end of the game, and it's a tie! {{all_scores_text}}. Thanks for playing!
