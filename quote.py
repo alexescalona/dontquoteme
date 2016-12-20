@@ -63,7 +63,10 @@ def next_round():
 
 @ask.intent("AnswerIntent", convert={'first': int, 'second': int, 'third': int})
 def answer(author):
-    quote_json = session.attributes['quote_json']
+    quote_json = session.attributes.get('quote_json', None)
+    if quote_json is None:
+        return new_game()
+
     if check_response(author, quote_json['author']):
         increment_score()
         msg = render_template(
