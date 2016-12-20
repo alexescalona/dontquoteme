@@ -25,6 +25,10 @@ def get_new_quote():
     return quote_json
 
 
+def check_response(provided, expected):
+    return provided == expected
+
+
 @ask.launch
 def new_game():
 
@@ -46,7 +50,7 @@ def next_round():
 @ask.intent("AnswerIntent", convert={'first': int, 'second': int, 'third': int})
 def answer(author):
     quote_json = session.attributes['quote_json']
-    if author == quote_json['author']:
+    if check_response(author, quote_json['author']):
         msg = render_template('win')
     else:
         msg = render_template('lose', author=quote_json['author'])
