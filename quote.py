@@ -4,6 +4,8 @@ import json
 from random import randint
 from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
 
 
 app = Flask(__name__)
@@ -26,7 +28,7 @@ def get_new_quote():
 
 
 def check_response(provided, expected):
-    return provided == expected
+    return fuzz.ratio(provided.lower(), expected.lower())>=80
 
 
 @ask.launch
