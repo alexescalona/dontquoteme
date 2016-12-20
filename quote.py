@@ -91,8 +91,6 @@ def answer(author):
     else:
         win_lose_message = render_template('lose', author=quote_json['author'])
 
-    points_message = render_template('points', points_text=get_points_text())
-
     if is_game_over():
         # Show game over message and ask if they want to play again?
         game_over_message = render_template(
@@ -104,7 +102,9 @@ def answer(author):
     else:
         # Show next round
         round_msg = setup_round()
-        msg = "%s %s" % (win_lose_message, round_msg)
+        points_message = render_template('points',
+                                         points_text=get_points_text())
+        msg = "%s %s %s" % (win_lose_message, points_message, round_msg)
         return question(msg)
 
 if __name__ == '__main__':
