@@ -44,8 +44,12 @@ def get_points_text():
     score = session.attributes.get('score', 0)
     if score == 1:
         return "{0} point".format(score)
+    elif score == 0:
+        return "no points"
     else:
         return "{0} points".format(score)
+
+
 
 
 @ask.launch
