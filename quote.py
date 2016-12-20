@@ -142,7 +142,7 @@ def new_game():
     return question(welcome_msg)
 
 
-@ask.intent("NumberOfPlayersIntent", convert={'players': int})
+@ask.intent("NumberOfPlayersIntent")
 def number_of_players(players):
     print "number_of_players(%r)" % players
     if players is None:
