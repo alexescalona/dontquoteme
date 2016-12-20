@@ -144,11 +144,17 @@ def new_game():
 
 @ask.intent("NumberOfPlayersIntent", convert={'players': int})
 def number_of_players(players):
-    players_int = int(players)
+    print "number_of_players(%r)" % players
+    if players is None:
+        players_int = 0
+    else:
+        players_int = int(players)
+
     if players_int < 1:
         players_int = 1
     elif players_int >= MAX_PLAYERS:
         players_int = MAX_PLAYERS
+
     session.attributes['players'] = players_int
     round_message = setup_round()
     start_message = render_template(
