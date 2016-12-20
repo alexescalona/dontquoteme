@@ -1,11 +1,6 @@
-welcome: Welcome to Don't Call me Shirley! Are you ready to test your movie quote knowledge?
-
-round: Round {{round}}. Who said {{quote}}?
-
-win: Good job, that's correct!
-
-points: You have {{points_text}}.
-
-lose: Sorry, thats incorrect; the answer is {{author}}.
-
-game_over: That's the end of the game. You finished with {{points_text}}. Thanks for playing!
+welcome: Welcome to Don't Call me Shirley! How many players will be testing their movie quote knowledge today?
+game_start: We'll be playing {{rounds}} rounds today. Here we go!
+round: Round {{round}}. {{player_text}} is up. Who said {{quote}}?
+win: Good job, {{player_text}}! That's correct! You have {{points_text}}.
+lose: Sorry, thats incorrect; the answer is {{author}}. {{player_text}}, you now have {{points_text}}.
+game_over: That's the end of the game. Congratulations {{winning_player_text}}! {{all_scores_text}}. Thanks for playing!

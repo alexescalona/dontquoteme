@@ -1,3 +1,4 @@
 YesIntent yes
 YesIntent sure
 AnswerIntent {author}
+NumberOfPlayersIntent {number}

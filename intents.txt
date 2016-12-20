@@ -1,24 +1,26 @@
 {
-
-    "intents": [{
-
-        "intent": "YesIntent"
-
-    }, {
-
-        "intent": "AnswerIntent",
-
-        "slots": [{
-
-            "name": "author",
-
-            "type": "AMAZON.Movie"
-
-        }]},
-    {
-
-        "intent": "ContinueIntent"
-
-    }]
-
+    "intents":
+    [
+        {
+            "intent": "YesIntent"
+        },
+        {
+            "intent": "AnswerIntent",
+            "slots": [
+                {
+                    "name": "author",
+                    "type": "AMAZON.Movie"
+                }
+            ]
+        },
+        {
+            "intent": "NumberOfPlayersIntent",
+            "slots": [
+                {
+                    "name": "number",
+                    "type": "AMAZON.NUMBER"
+                }
+            ]
+        },
+    ]
 }
