@@ -31,6 +31,20 @@ def check_response(provided, expected):
     return fuzz.ratio(provided.lower(), expected.lower())>=80
 
 
+def increment_score():
+    score = session.attributes.get('score', 0)
+    score += 1
+    session.attributes['score'] = score
+
+
+def get_points_text():
+    score = session.attributes.get('score', 0)
+    if score == 1:
+        return "{0} point".format(score)
+    else:
+        return "{0} points".format(score)
+
+
 @ask.launch
 def new_game():
 
@@ -51,11 +65,22 @@ def next_round():
 
 @ask.intent("AnswerIntent", convert={'first': int, 'second': int, 'third': int})
 def answer(author):
-    quote_json = session.attributes['quote_json']
+    quote_json = session.attributes.get('quote_json', None)
+    if quote_json is None:
+        return new_game()
+
     if check_response(author, quote_json['author']):
-        msg = render_template('win')
+        increment_score()
+        msg = render_template(
+            'win',
+            points_text=get_points_text()
+        )
     else:
-        msg = render_template('lose', author=quote_json['author'])
+        msg = render_template(
+            'lose',
+            author=quote_json['author'],
+            points_text=get_points_text()
+        )
     return question(msg)
 
 
