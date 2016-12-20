@@ -51,7 +51,7 @@ def get_points_text():
 
 
 def is_game_over():
-    return session.attributes['round'] <= NUM_ROUNDS
+    return session.attributes['round'] > NUM_ROUNDS
 
 
 def setup_round():
