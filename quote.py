@@ -22,14 +22,13 @@ logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 def new_game():
 
     welcome_msg = render_template('welcome')
-
+    session.attributes['round']=1
     return question(welcome_msg)
 
 
 @ask.intent("YesIntent")
 
 def next_round():
-
   response = requests.post("https://andruxnet-random-famous-quotes.p.mashape.com/?cat=movies",
   headers={
     "X-Mashape-Key": "qxw2noHOjgmshc3avMkLGu49Jcvrp186kqjjsnvnLClFDEYPGG",
@@ -39,10 +38,12 @@ def next_round():
   )
   quote_json = json.loads(response.text)
 
-  round_msg = render_template('round', quote=quote_json['quote'])
+  round_msg = render_template('round', quote=quote_json['quote'], round=session.attributes['round'])
 
   session.attributes['quote_json']=quote_json
   return question(round_msg)
+
+
 
 
 @ask.intent("AnswerIntent", convert={'first': int, 'second': int, 'third': int})
@@ -59,8 +60,17 @@ def answer(author):
 
         msg = render_template('lose', author=quote_json['author'])
 
-    return statement(msg)
+    return question(msg)
 
+@ask.intent("ContinueIntent")
+
+def continue_round():   
+    session.attributes['round'] = session.attributes['round'] + 1
+    if session.attributes['round'] < 3:
+        return next_round()
+    else:
+        msg = render_template('end')
+        return statement(msg)
 
 if __name__ == '__main__':
 

@@ -6,3 +6,4 @@ YesIntent sure
 
 AnswerIntent {author}
 
+ContinueIntent next

@@ -14,7 +14,10 @@
 
             "type": "AMAZON.Movie"
 
-        }]
+        }]},
+    {
+
+        "intent": "ContinueIntent"
 
     }]
 

@@ -1,7 +1,9 @@
 welcome: Welcome to Don't Call me Shirley! Are you ready to test your movie quote knowledge?
 
-round: Who said {{quote}}?
+round: Round {{round}}. Who said {{quote}}?
 
 win: Good job!
 
-lose: Sorry, that's incorrect, the answer is {{author}}
+lose: Sorry, thats incorrect, the answer is {{author}}
+
+end: Thanks for playing!
