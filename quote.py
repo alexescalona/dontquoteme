@@ -64,17 +64,3 @@ def continue_round():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-# import requests
-# #https://andruxnet-random-famous-quotes.p.mashape.com/?cat=famous
-# # These code snippets use an open-source library. http://unirest.io/python
-# response = requests.post("https://andruxnet-random-famous-quotes.p.mashape.com/?cat=movies",
-#   headers={
-#     "X-Mashape-Key": "qxw2noHOjgmshc3avMkLGu49Jcvrp186kqjjsnvnLClFDEYPGG",
-#     "Content-Type": "application/x-www-form-urlencoded",
-#     "Accept": "application/json"
-#   }
-# )
-# print response
