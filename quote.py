@@ -29,6 +29,20 @@ def check_response(provided, expected):
     return provided == expected
 
 
+def increment_score():
+    score = session.attributes.get('score', 0)
+    score += 1
+    session.attributes['score'] = score
+
+
+def get_points_text():
+    score = session.attributes.get('score', 0)
+    if score == 1:
+        return "{0} point".format(score)
+    else:
+        return "{0} points".format(score)
+
+
 @ask.launch
 def new_game():
 
@@ -51,9 +65,17 @@ def next_round():
 def answer(author):
     quote_json = session.attributes['quote_json']
     if check_response(author, quote_json['author']):
-        msg = render_template('win')
+        increment_score()
+        msg = render_template(
+            'win',
+            points_text=get_points_text()
+        )
     else:
-        msg = render_template('lose', author=quote_json['author'])
+        msg = render_template(
+            'lose',
+            author=quote_json['author'],
+            points_text=get_points_text()
+        )
     return question(msg)
 
 
