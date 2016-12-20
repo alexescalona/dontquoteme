@@ -12,9 +12,16 @@ Fun Alexa hackathon project.
 
     pip install -r requirements.txt
 
-### Run app
+### Run locally
 
-(TODO)
+    python quotes.py
+
+### Deploy to AWS
+
+* Add credentials group called "nni_hackathon" in `~/.aws/credentials`
+* Deploy with `zappa`:
+
+      zappa deploy dev
 
 ## Resources & references
 

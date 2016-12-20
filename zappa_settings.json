@@ -1,0 +1,8 @@
+{
+    "dev": {
+        "app_function": "quote.app", 
+        "aws_region": "us-east-1",
+        "profile_name": "nni_hackathon",
+        "s3_bucket": "nni-alexa-hackathon-team-b-dev"
+    }
+}
