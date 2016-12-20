@@ -95,7 +95,8 @@ def answer(author):
 
     if success:
         increment_score()
-        win_lose_message = render_template('win')
+        win_msg = 'win_'+str(randint(1,3))
+        win_lose_message = render_template(win_msg)
     else:
         lose_msg = 'lose_'+str(randint(1,10))
 

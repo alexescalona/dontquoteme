@@ -2,7 +2,9 @@ welcome: Welcome to Don't Call me Shirley! Are you ready to test your movie quot
 
 round: Round {{round}}. Who said {{quote}}?
 
-win: Good job, thats correct!
+win_1: Good job, thats correct!
+win_2: Ze shoots, Ze scores!
+win_3: You are right, wooooo!
 
 points: You have {{points_text}}.
 
