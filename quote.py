@@ -33,7 +33,7 @@ def get_new_quote():
 
 
 def check_response(provided, expected):
-    return fuzz.ratio(provided.lower(), expected.lower())>=80
+    return fuzz.ratio(provided.lower(), expected.lower())>=70
 
 
 def current_player():
@@ -205,7 +205,7 @@ def answer(author):
     success = check_response(author, quote_json['author'])
     if success:
         increment_score()
-        tpl_name = 'win'
+        tpl_name = 'win_'+str(randint(1,3))
     else:
         tpl_name = 'lose_'+str(randint(1, 10))
 

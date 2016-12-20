@@ -2,6 +2,9 @@ welcome: Welcome to Don't Call me Shirley! Are you ready to test your movie triv
 game_start: We'll be playing {{rounds}} rounds today with {{players}} players. Here we go!
 round: Round {{round}}. {{player_text}} is up. Who said {{quote}}?
 win: Good job, {{player_text}}! That's correct! You have {{points_text}}.
+win_1: Good job, thats correct! {{player_text}}, you have {{points_text}}.
+win_2: Ze shoots, Ze scores! {{player_text}}, you have {{points_text}}.
+win_3: You are right, wooooo! {{player_text}}, you have {{points_text}}.
 lose: Sorry, thats incorrect; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
 lose_1: That answer is bad and you should feel bad; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
 lose_2: You are the weakest link; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
