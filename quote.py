@@ -144,7 +144,6 @@ def new_game():
 
 @ask.intent("NumberOfPlayersIntent", convert={'players': int})
 def number_of_players(players):
-    logger.debug("Number of players: %s" % players)
     players_int = int(players)
     if players_int < 1:
         players_int = 1
