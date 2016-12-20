@@ -8,7 +8,7 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 
 
-NUM_ROUNDS = 3
+NUM_ROUNDS = 6
 
 
 app = Flask(__name__)
