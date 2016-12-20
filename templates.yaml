@@ -16,5 +16,5 @@ lose_7: I award no points, and may God have mercy on your soul; the answer is {{
 lose_8: noooooooooooooope; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
 lose_9: Methink’st thou art a general offence and every man should beat thee; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
 lose_10: I desire that we be better strangers; the answer is {{author}}. {{player_text}}, you have {{points_text}}.
-game_over_winner: That's the end of the game. Congratulations {{winning_player_text}}! {{all_scores_text}}. Thanks for playing!
+game_over: That's the end of the game. Congratulations {{winning_player_text}}! {{all_scores_text}}. Thanks for playing!
 game_over_tie: That's the end of the game, and it's a tie! {{all_scores_text}}. Thanks for playing!

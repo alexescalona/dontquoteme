@@ -72,11 +72,13 @@ def get_winners(sorted_scores=None):
     if sorted_scores is None:
         sorted_scores = get_sorted_scores()
     winners = []
-    for player_num, score in sorted_scores:
+    for score_info in sorted_scores:
+        player_num, score = score_info
         if len(winners) == 0 or score == winners[0][1]:
-            winners.append((player_num, score))
+            winners.append(score_info)
         else:
             break
+    print "get_winners() returning %r" % winners
     return winners
 
 
@@ -222,7 +224,10 @@ def answer(author):
         sorted_scores = get_sorted_scores()
         winners = get_winners(sorted_scores)
         if len(winners) == 1:
-            winning_player_text = get_player_text(winners[0])
+            winner = winners[0]
+            print "winner: %r" % winner
+            winning_player_text = get_player_text(winner[0])
+            print "winning_player_text: %r" % winning_player_text
             game_over_message = render_template(
                 'game_over',
                 all_scores_text=get_scores_text(),
