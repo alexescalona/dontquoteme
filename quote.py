@@ -8,6 +8,9 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 
 
+NUM_ROUNDS = 3
+
+
 app = Flask(__name__)
 ask = Ask(app, "/")
 
@@ -87,7 +90,7 @@ def answer(author):
 @ask.intent("ContinueIntent")
 def continue_round():   
     session.attributes['round'] = session.attributes['round'] + 1
-    if session.attributes['round'] < 3:
+    if session.attributes['round'] <= NUM_ROUNDS:
         return next_round()
     else:
         msg = render_template('end')
