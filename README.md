@@ -14,7 +14,7 @@ Fun Alexa hackathon project.
 
 ### Run locally
 
-    python memory_game.py
+    python quotes.py
 
 ### Deploy to AWS
 
