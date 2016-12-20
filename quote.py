@@ -31,7 +31,7 @@ def get_new_quote():
 
 
 def check_response(provided, expected):
-    return fuzz.ratio(provided.lower(), expected.lower())>=80
+    return fuzz.ratio(provided.lower(), expected.lower())>=70
 
 
 def increment_score():

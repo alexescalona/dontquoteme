@@ -1,6 +1,6 @@
 welcome: Welcome to Don't Call me Shirley! Are you ready to test your movie quote knowledge?
 
-round: Round {{round}}. Who said {{quote}}?
+round: Round {{round}}. What movie said {{quote}}?
 
 win_1: Good job, thats correct!
 win_2: Ze shoots, Ze scores!
