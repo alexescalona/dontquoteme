@@ -2,8 +2,10 @@ welcome: Welcome to Don't Call me Shirley! Are you ready to test your movie quot
 
 round: Round {{round}}. Who said {{quote}}?
 
-win: Good job! You have {{points_text}}.
+win: Good job, that's correct!
 
-lose: Sorry, thats incorrect, the answer is {{author}}. You have {{points_text}}.
+points: You have {{points_text}}.
 
-end: Thanks for playing!
+lose: Sorry, thats incorrect; the answer is {{author}}.
+
+game_over: That's the end of the game. You finished with {{points_text}}. Thanks for playing!

@@ -50,6 +50,17 @@ def get_points_text():
         return "{0} points".format(score)
 
 
+def is_game_over():
+    return session.attributes['round'] <= NUM_ROUNDS
+
+
+def setup_round():
+    quote_json = get_new_quote()
+    round_msg = render_template('round', quote=quote_json['quote'],
+                                round=session.attributes['round'])
+
+    session.attributes['quote_json'] = quote_json
+    return round_msg
 
 
 @ask.launch
@@ -62,12 +73,8 @@ def new_game():
 
 @ask.intent("YesIntent")
 def next_round():
-    quote_json = get_new_quote()
-    round_msg = render_template('round', quote=quote_json['quote'],
-                                round=session.attributes['round'])
-
-    session.attributes['quote_json'] = quote_json
-    return question(round_msg)
+    msg = setup_round()
+    return question(msg)
 
 
 @ask.intent("AnswerIntent", convert={'first': int, 'second': int, 'third': int})
@@ -76,29 +83,29 @@ def answer(author):
     if quote_json is None:
         return new_game()
 
-    if check_response(author, quote_json['author']):
+    success = check_response(author, quote_json['author'])
+
+    if success:
         increment_score()
-        msg = render_template(
-            'win',
+        win_lose_message = render_template('win')
+    else:
+        win_lose_message = render_template('lose', author=quote_json['author'])
+
+    points_message = render_template('points', points_text=get_points_text())
+
+    if is_game_over():
+        # Show game over message and ask if they want to play again?
+        game_over_message = render_template(
+            'game_over',
             points_text=get_points_text()
         )
-    else:
-        msg = render_template(
-            'lose',
-            author=quote_json['author'],
-            points_text=get_points_text()
-        )
-    return question(msg)
-
-
-@ask.intent("ContinueIntent")
-def continue_round():   
-    session.attributes['round'] = session.attributes['round'] + 1
-    if session.attributes['round'] <= NUM_ROUNDS:
-        return next_round()
-    else:
-        msg = render_template('end')
+        msg = "%s %s" % (win_lose_message, game_over_message)
         return statement(msg)
+    else:
+        # Show next round
+        round_msg = setup_round()
+        msg = "%s %s" % (win_lose_message, round_msg)
+        return question(msg)
 
 if __name__ == '__main__':
     app.run(debug=True)
