@@ -2,10 +2,19 @@ welcome: Welcome to Don't Call me Shirley! Are you ready to test your movie quot
 
 round: Round {{round}}. Who said {{quote}}?
 
-win: Good job, that's correct!
+win: Good job, thats correct!
 
 points: You have {{points_text}}.
 
-lose: Sorry, thats incorrect; the answer is {{author}}.
+lose_1: That answer is bad and you should feel bad; the answer is {{author}}.
+lose_2: You are the weakest link; the answer is {{author}}.
+lose_3: My hamster would have known that; the answer is {{author}}.
+lose_4: No. Just, no; the answer is {{author}}.
+lose_5: what you have just said is one of the most insanely idiotic things I have ever heard; the answer is {{author}}.
+lose_6: Everyone in this room is now dumber for having listened to your response; the answer is {{author}}.
+lose_7: I award no points, and may God have mercy on your soul; the answer is {{author}}.
+lose_8: noooooooooooooope; the answer is {{author}}.
+lose_9: Methink’st thou art a general offence and every man should beat thee; the answer is {{author}}.
+lose_10: I desire that we be better strangers; the answer is {{author}}.
 
 game_over: That's the end of the game. You finished with {{points_text}}. Thanks for playing!

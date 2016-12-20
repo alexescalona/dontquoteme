@@ -97,7 +97,9 @@ def answer(author):
         increment_score()
         win_lose_message = render_template('win')
     else:
-        win_lose_message = render_template('lose', author=quote_json['author'])
+        lose_msg = 'lose_'+str(randint(1,10))
+
+        win_lose_message = render_template(lose_msg, author=quote_json['author'])
 
     increment_round()
     if is_game_over():
