@@ -54,20 +54,28 @@ def is_game_over():
     return session.attributes['round'] > NUM_ROUNDS
 
 
-def setup_round():
-    quote_json = get_new_quote()
-    round_msg = render_template('round', quote=quote_json['quote'],
-                                round=session.attributes['round'])
+def increment_round():
+    round_num = session.attributes.get('round', 1)
+    round_num += 1
+    session.attributes['round'] = round_num
 
+
+def setup_round():
+    round_num = session.attributes.get('round', 1)
+    quote_json = get_new_quote()
+    round_msg = render_template(
+        'round',
+        quote=quote_json['quote'],
+        round=round_num,
+    )
     session.attributes['quote_json'] = quote_json
+    session.attributes['round_num'] = round_num
     return round_msg
 
 
 @ask.launch
 def new_game():
-
     welcome_msg = render_template('welcome')
-    session.attributes['round']=1
     return question(welcome_msg)
 
 
@@ -91,6 +99,7 @@ def answer(author):
     else:
         win_lose_message = render_template('lose', author=quote_json['author'])
 
+    increment_round()
     if is_game_over():
         # Show game over message and ask if they want to play again?
         game_over_message = render_template(
