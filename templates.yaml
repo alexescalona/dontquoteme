@@ -1,6 +1,6 @@
 welcome: Welcome to Don't Call me Shirley! Are you ready to test your movie trivia knowledge?
 game_start: We'll be playing {{rounds}} rounds today with {{players}} players. Here we go!
-round: Round {{round}}. {{player_text}} is up. Who said {{quote}}?
+round: Round {{round}}. {{player_text}} is up. Here is the quote: {{quote}}. {{player_text}}, what movie is that from?
 win: Good job, {{player_text}}! That's correct! You have {{points_text}}.
 win_1: Good job, thats correct! {{player_text}}, you have {{points_text}}.
 win_2: Ze shoots, Ze scores! {{player_text}}, you have {{points_text}}.
